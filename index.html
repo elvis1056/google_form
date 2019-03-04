@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>week4.hw2</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style type="text/css">
+		
+		body {
+			margin: 0px;
+		}
+		.page__top {
+			background-image: url(background.jpg);
+			background-position: center;
+			width: 100%;
+			height: 300px;
+			margin-top: 0px;
+		}
+		.page__button {
+			background: #F5F5DC;
+		}
+		.box {
+			position: relative;
+			max-width: 700px;
+			margin: auto;
+			border: 1px white;
+			top: -80px;
+			background: white;
+			padding: 20px;
+			border-top: 10px solid #EEE;
+		}
+		.box__top {
+			padding: 20px;
+		}
+		.box__toptitle {
+			font-size: 36px;
+			margin-bottom: 20px;
+		}
+		.box__content {
+			padding: 20px;
+		}
+		.box__title {
+			font-size: 20px;
+		}
+		.box__ex {
+			font-size: 14px;
+		}
+		#submit {
+			border: solid 1px;
+			border-radius: 10%;
+			background: #155ded;
+			color: #f8f8f8;
+			width: 100px;
+			height: 50px;
+		}
+		.star__ex {
+			color: red;
+		}
+		.star {
+			color: red;
+		}
+		.reminder {
+			visibility: hidden;
+		}
+		#submit:hover {
+			cursor: pointer;
+		}
+	</style>
+	
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", () => {
+			document.querySelector("#submit").addEventListener("click", () => {
+				
+				//取得每個input內容
+				let answer1 = document.getElementById("email");
+				let answer2 = document.getElementById("name");
+				let answer3 = ""
+				let answer4 = document.getElementById("profession");
+				let answer5 = document.getElementById("other");
+
+				let choseType = document.querySelectorAll("[name=type]")
+
+
+				if(choseType[0].checked) {
+					answer3 = choseType[0].value;
+				} else {
+					answer3 = choseType[1].value;
+				}
+
+
+				if(choseType[0].checked == false && choseType[1].checked == false) {
+					document.querySelector("#r3").classList.remove("reminder")
+					document.querySelector(".box__chose").style.background = "red"
+				} else if(answer1.value === "") {
+					document.querySelector("#r1").classList.remove("reminder")
+					document.querySelector(".box__email").style.background = "red"
+				} else if (answer2.value === "") {
+					document.querySelector("#r2").classList.remove("reminder")
+					document.querySelector(".box__name").style.background = "red"
+				} else if (answer4.value === "") {
+					document.querySelector("#r4").classList.remove("reminder")
+					document.querySelector(".box__profession").style.background = "red"
+				} else if (answer5.value === "") {
+					document.querySelector("#r5").classList.remove("reminder")
+					document.querySelector(".box__other").style.background = "red"
+				} else {
+					console.log("以下是您的回覆資訊")
+					console.log("E-mail:" + answer1.value);
+				    console.log("暱稱:" + answer2.value);
+				    console.log(answer3.value)
+				    console.log("相關背景:" + answer4.value);
+				    console.log("其他:" + answer5.value);
+				    alert('Submitted!');
+				}
+			})
+		})
+// 送出表單時，必填的地方如果空白，要能夠把背景變紅色並且提示使用者
+//	1. 先點選submit
+//  2. 抓取其中一個元素並且設定監聽的事件
+//  3. 將各input新增一個class="require"方便抓取
+//  4. 有多個class="require"，以迴圈做抓取每個class="require"
+//  5. 使用if判斷填選的那格是否為空白(當placeholder送出為空白時)
+//  6. 如果是將box__content那格顯是為紅色，並秀出class="reminder"的字(因有設定style display:none)
+//  7. 如果正確就不做任何事情
+
+// var submit = document.querySelectorAll(".")
+// document.getElementsByClassName("reminder")
+
+	</script>
+	
+</head>
+<body>
+	<div class="page">
+		<div class="page__top"></div>
+
+		<div class="page__button">
+			<div class="box">
+
+				<div class="box__top">
+					<div class="box__toptitle">程式導師實驗計畫報名表</div>
+					<div class="box__topdetail">詳情請參考：<a href="https://medium.com/hulis-blog/mentor-program-s2-f876c4e13d3b">https://medium.com/hulis-blog/mentor-program-s2-f876c4e13d3b</a>
+						<br>
+						填完之後請務必按照文章內的說明再寄信給我，才算報名成功喔
+					</div>
+					<br>
+					<div class="star__ex">*必填</div>
+				</div>
+
+				<div class="box__button">
+					
+					<div class="box__content box__email">
+						<div class="box__title">電子郵件地址 <span class="star">*</span>
+						</div>
+						<input type="email" name="email" id="email" placeholder="你的電子郵件">
+						<div class="reminder" id="r1">這是必填問題</div>
+					</div>
+					
+					<div class="box__content box__name">
+						<div class="box__title">暱稱 <span class="star">*</span>
+							<br>
+							<div class="box__ex">該如何稱呼你</div>
+						</div>
+						<input type="text" id="name" placeholder="你的回答">
+						<div class="reminder" id="r2">這是必填問題</div>
+					</div>
+					
+					<div class="box__content box__chose">
+						<div class="box__title">報名類型 <span class="star">*</span></div>
+						<input type="radio" name="type" id="first">
+						<label for="first">從零到一基礎班（一個月後開始收保證金 3000，淘汰不退還，結業後兩個月內找到工作付一個月半薪水，沒工作不用付）</label>
+						<br>
+						<input type="radio" name="type" id="second">
+						<label for="second">在職工程師加強班（一個月後開始收保證金 3000，兩個月時收學費 30000，被淘汰不退還）</label>
+						<div class="reminder" id="r3">這是必填問題</div>
+					</div>
+
+					<div class="box__content box__profession">
+						<div class="box__title">現在的職業 <span class="star">*</span>
+							<br>
+							<div class="box__ex">範例：學生、前端工程師、待業中、業務</div>
+						</div>
+						<input type="text" id="profession" placeholder="你的回答">
+						<div class="reminder" id="r4">這是必填問題</div>
+					</div>
+					
+					<div class="box__content box__other">
+						<div class="box__title">是否有程式相關背景？ <span class="star">*</span>
+							<br>
+							<div class="box__ex">範例：無、高中時候學過C++</div>
+						</div>
+						<input type="text" id="other" placeholder="你的回答">
+						<div class="reminder" id="r5">這是必填問題</div>
+					</div>
+					
+					<div class="box__content">
+						<div class="box__title">其他
+							<br>
+							<div class="box__ex">你想說的話</div>
+						</div>
+						<input type="text" placeholder="你的回答">
+					</div>
+					
+					<div class="box__content">
+						<input type="submit" name="submit" id="submit" >
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+
+</body>
+</html>
